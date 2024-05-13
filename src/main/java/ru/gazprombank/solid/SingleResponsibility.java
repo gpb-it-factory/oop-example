@@ -1,3 +1,6 @@
+// Single Responsibility Principle - принцип единственной ответственности.
+// Каждый класс должен иметь только одну зону ответственности.
+
 public void main() {
     // вся функциональность в одном классе
     var accountService = new AccountService();

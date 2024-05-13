@@ -1,5 +1,8 @@
 import java.util.List;
 
+// Open closed Principle - принцип открытости-закрытости.
+// Классы должны быть открыты для расширения, но закрыты для изменения.
+
 public void main() {
     String operationMessage = "Совершена операция по счёту";
     var notificationService = new NotificationService();
