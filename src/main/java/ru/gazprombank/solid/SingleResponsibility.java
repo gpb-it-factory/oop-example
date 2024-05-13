@@ -1,9 +1,11 @@
 public void main() {
+    // вся функциональность в одном классе
     var accountService = new AccountService();
     var account = accountService.findAccount("40702810200210000237");
     accountService.printCheck(account);
     accountService.sendSms(account, "+71231231233");
 
+    // у каждого класса своя ответственность
     var refactoredAccountService = new SingleResponsibilityAccountService();
     var accountFromRefactoredService = refactoredAccountService.find("40702810200210000237");
     var checkService = new CheckService();
@@ -14,35 +16,35 @@ public void main() {
 
 public class AccountService {
     public Account findAccount(String accountNumber) {
-        // поиск счёта в базе
+        System.out.println(STR."Найдён счёт в базе по номеру \{accountNumber}");
         return new Account();
     }
 
     public void printCheck(Account account) {
-        // печать выписки
+        System.out.println("Напечатана выписка по счёту");
     }
 
     public void sendSms(Account account, String phoneNumber) {
-        // отправка смс-оповещения по счёту
+        System.out.println(STR."Отправлено уведомление о счёте по смс на номер \{phoneNumber}");
     }
 }
 
 public class SingleResponsibilityAccountService {
     public Account find(String accountNumber) {
-        // поиск счёта в базе
+        System.out.println(STR."Найдён счёт в базе по номеру \{accountNumber}");
         return new Account();
     }
 }
 
 public class CheckService {
     public void print(Account account) {
-        // печать выписки
+        System.out.println("Напечатана выписка по счёту");
     }
 }
 
 public class SmsService {
     public void send(Account account, String phoneNumber) {
-        // отправка смс-оповещения по счёту
+        System.out.println(STR."Отправлено уведомление о счёте по смс на номер \{phoneNumber}");
     }
 }
 

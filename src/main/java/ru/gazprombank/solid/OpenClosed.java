@@ -1,17 +1,73 @@
+import java.util.List;
+
 public void main() {
+    String operationMessage = "Совершена операция по счёту";
+    var notificationService = new NotificationService();
+    // клиент совершил операцию и у него включены все виды уведомлений
+    notificationService.sendEmail(operationMessage);
+    notificationService.sendSms(operationMessage);
+    notificationService.sendPush(operationMessage);
+
+    // ввели новый тип уведомлений - нужно изменять сервис уведомлений
+    var notificationServiceV2 = new NotificationServiceV2();
+    notificationServiceV2.sendEmail(operationMessage);
+    notificationServiceV2.sendSms(operationMessage);
+    notificationServiceV2.sendPush(operationMessage);
+    notificationServiceV2.sendPigeonMail(operationMessage);
+
+    // OCP-compatible
+    List<OpenClosedNotificationService> notificationServices = List.of(
+            new EmailNotificationService(),
+            new SmsNotificationService(),
+            new PushNotificationService());
+
+    for (var service : notificationServices) {
+        service.send(operationMessage);
+    }
+
+    List<OpenClosedNotificationService> notificationServicesV2 = List.of(
+            new EmailNotificationService(),
+            new SmsNotificationService(),
+            new PushNotificationService(),
+            new PigeonMailNotificationService());
+
+    for (var service : notificationServicesV2) {
+        service.send(operationMessage);
+    }
 }
 
-public class NotificationServiceImpl {
+public class NotificationService {
     public void sendEmail(String message) {
-        // отправка email
+        System.out.println(STR."На email отправлено уведомление \"\{message}\"");
     }
 
     public void sendSms(String message) {
-        // отправка смс
+        System.out.println(STR."ПО SMS отправлено уведомление \"\{message}\"");
+
     }
 
     public void sendPush(String message) {
-        // отправка пуша
+        System.out.println(STR."Отправлено push-уведомление \"\{message}\"");
+    }
+}
+
+// решили добавить голубиную почту как канал уведомлений
+public class NotificationServiceV2 {
+    public void sendEmail(String message) {
+        System.out.println(STR."На email отправлено уведомление \"\{message}\"");
+    }
+
+    public void sendSms(String message) {
+        System.out.println(STR."ПО SMS отправлено уведомление \"\{message}\"");
+
+    }
+
+    public void sendPush(String message) {
+        System.out.println(STR."Отправлено push-уведомление \"\{message}\"");
+    }
+
+    public void sendPigeonMail(String message) {
+        System.out.println(STR."Отправлен почтовый голуб с уведомлением \"\{message}\"");
     }
 }
 
@@ -22,27 +78,27 @@ public interface OpenClosedNotificationService {
 public class EmailNotificationService implements OpenClosedNotificationService {
     @Override
     public void send(String message) {
-        // отправка email
+        System.out.println(STR."На email отправлено уведомление \"\{message}\"");
     }
 }
 
 public class SmsNotificationService implements OpenClosedNotificationService {
     @Override
     public void send(String message) {
-        // отправка sms
+        System.out.println(STR."ПО SMS отправлено уведомление \"\{message}\"");
     }
 }
 
 public class PushNotificationService implements OpenClosedNotificationService {
     @Override
     public void send(String message) {
-        // отправка push
+        System.out.println(STR."Отправлено push-уведомление \"\{message}\"");
     }
 }
 
 public class PigeonMailNotificationService implements OpenClosedNotificationService {
     @Override
     public void send(String message) {
-        // отправка почтового голубя
+        System.out.println(STR."Отправлен почтовый голуб с уведомлением \"\{message}\"");
     }
 }
