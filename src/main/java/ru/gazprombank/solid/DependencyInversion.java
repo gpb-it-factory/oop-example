@@ -2,14 +2,17 @@ import java.math.BigDecimal;
 
 public void main() {
     var shop = new Shop(new Cash());
-    shop.doPayment(new Order(), BigDecimal.valueOf(300));
+    var order = new Order(BigDecimal.valueOf(300));
+    shop.doPayment(order);
 
+    // зависим от абстракции, а не конкретной реализации
+    // поэтому доступны разные методы оплаты
     var shopDIP = new ShopDIP(new CashDIP());
-    shopDIP.doPayment(new Order(), BigDecimal.valueOf(400));
+    shopDIP.doPayment(order);
     var shopCifRub = new ShopDIP(new CifRub());
-    shopCifRub.doPayment(new Order(), BigDecimal.valueOf(400));
+    shopCifRub.doPayment(order);
     var shopCard = new ShopDIP(new BankCard());
-    shopCard.doPayment(new Order(), BigDecimal.valueOf(500));
+    shopCard.doPayment(order);
 }
 
 public class Cash {
@@ -23,8 +26,8 @@ public class Shop {
     public Shop(Cash cash) {
         this.cash = cash;
     }
-    public void doPayment(Order order, BigDecimal amount){
-        cash.doTransaction(amount);
+    public void doPayment(Order order){
+        cash.doTransaction(order.getAmount());
     }
 }
 
@@ -39,8 +42,8 @@ public class ShopDIP {
     public ShopDIP(PaymentMethod paymentMethod) {
         this.paymentMethod = paymentMethod;
     }
-    public void doPayment(Order order, BigDecimal amount){
-        paymentMethod.doTransaction(amount);
+    public void doPayment(Order order){
+        paymentMethod.doTransaction(order.getAmount());
     }
 }
 
@@ -63,4 +66,14 @@ public class CifRub implements PaymentMethod {
     }
 }
 
-public class Order {}
+public class Order {
+    private final BigDecimal amount;
+
+    public Order(BigDecimal amount) {
+        this.amount = amount;
+    }
+
+    public BigDecimal getAmount() {
+        return amount;
+    }
+}
