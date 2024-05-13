@@ -1,44 +1,61 @@
 public void main() {
+    var internetPaymentService = new InternetPaymentService();
+    internetPaymentService.payWebMoney();
+    internetPaymentService.payCreditCard();
+    internetPaymentService.paySBP();
+
+    var terminalPaymentService = new TerminalPaymentService();
+    terminalPaymentService.payWebMoney();
+    terminalPaymentService.payCreditCard();
+    terminalPaymentService.paySBP();
+
+    var internetPaymentServiceISP = new InternetPaymentServiceISP();
+    internetPaymentServiceISP.payWebMoney();
+    internetPaymentServiceISP.payCreditCard();
+    internetPaymentServiceISP.paySBP();
+
+    var terminalPaymentServiceISP = new TerminalPaymentServiceISP();
+    terminalPaymentServiceISP.payCreditCard();
+    terminalPaymentServiceISP.paySBP();
 }
 
 interface Payments {
     void payWebMoney();
     void payCreditCard();
-    void payPhoneNumber();
+    void paySBP();
 }
 
-class InternetPaymentService implements Payments{
+class InternetPaymentService implements Payments {
     @Override
     public void payWebMoney() {
-        //logic
+        System.out.println("Платёж через интернет по WebMoney");
     }
     @Override
     public void payCreditCard() {
-        //logic
+        System.out.println("Платёж через интернет по кредитной карте");
     }
     @Override
-    public void payPhoneNumber() {
-        //logic
+    public void paySBP() {
+        System.out.println("Платёж через интернет по СБП");
     }
 }
 
-class TerminalPaymentService implements Payments{
+class TerminalPaymentService implements Payments {
     @Override
     public void payWebMoney() {
-        //logic
+        System.out.println("В данный момент не поддерживается");
     }
     @Override
     public void payCreditCard() {
-        //logic
+        System.out.println("Платёж через терминал по кредитной карте");
     }
     @Override
-    public void payPhoneNumber() {
-        //???????
+    public void paySBP() {
+        System.out.println("Платёж через терминал по СБП");
     }
 }
 
 /////
-
 
 interface WebMoneyPayment {
     void payWebMoney();
@@ -46,35 +63,35 @@ interface WebMoneyPayment {
 interface CreditCardPayment {
     void payCreditCard();
 }
-interface PhoneNumberPayment {
-    void payPhoneNumber();
+interface SBPPayment {
+    void paySBP();
 }
 
-class InternetPaymentService2 implements WebMoneyPayment,
+class InternetPaymentServiceISP implements WebMoneyPayment,
         CreditCardPayment,
-        PhoneNumberPayment{
+        SBPPayment {
     @Override
     public void payWebMoney() {
-        //logic
+        System.out.println("Платёж через интернет по WebMoney");
     }
     @Override
     public void payCreditCard() {
-        //logic
+        System.out.println("Платёж через интернет по кредитной карте");
     }
     @Override
-    public void payPhoneNumber() {
-        //logic
+    public void paySBP() {
+        System.out.println("Платёж через интернет по СБП");
     }
 }
 
-class TerminalPaymentService2 implements WebMoneyPayment, CreditCardPayment{
-    @Override
-    public void payWebMoney() {
-        //logic
-    }
+class TerminalPaymentServiceISP implements CreditCardPayment, SBPPayment {
     @Override
     public void payCreditCard() {
-        //logic
+        System.out.println("Платёж через терминал по кредитной карте");
+    }
+    @Override
+    public void paySBP() {
+        System.out.println("Платёж через терминал по СБП");
     }
 }
 
