@@ -1,12 +1,10 @@
 package ru.gazprombank.oop.abstraction;
 
-import ru.gazprombank.oop.incapsulation.PaymentAccount;
-
 import java.math.BigDecimal;
 
 public class App {
     public static void main(String[] args) throws Exception {
-        //var account = new BankAccount("Deposit account"); // abstract class instance cannot be initialized
+        //var account = new BankAccount("Deposit account"); // abstract class instance cannot be instantiated
         var paymentAccount = new PaymentBankAccount("Payment account");
 
         paymentAccount.fill(BigDecimal.valueOf(100));
