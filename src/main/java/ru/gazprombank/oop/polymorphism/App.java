@@ -4,7 +4,7 @@ import ru.gazprombank.oop.polymorphism.OverdraftAccount;
 
 import java.math.BigDecimal;
 
-void main(String[] args) {
+void main() {
     var account = new Account("Simple account");
     var paymentAccount = new PaymentAccount("Deposit account");
     var overdraftAccount = new OverdraftAccount("Overdraft account", BigDecimal.valueOf(200));
@@ -16,6 +16,7 @@ void main(String[] args) {
 
 }
 
+// Generic
 public interface Printer<T> {
     void print(T obj);
 }

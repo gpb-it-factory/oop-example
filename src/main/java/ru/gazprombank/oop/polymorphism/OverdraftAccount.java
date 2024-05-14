@@ -13,9 +13,10 @@ public class OverdraftAccount extends PaymentAccount {
         this.overdraftLimit = overdraftLimit;
     }
 
-    public BigDecimal charge(BigDecimal amount) throws Exception {
+    @Override
+    public BigDecimal charge(BigDecimal amount) {
         var newBalance = this.balance.subtract(amount);
-        if(this.overdraftLimit.add(newBalance).compareTo(BigDecimal.ZERO) < 0) {
+        if (this.overdraftLimit.add(newBalance).compareTo(BigDecimal.ZERO) < 0) {
             System.out.println("Overdraft exceeded");
         } else {
             this.balance = newBalance;
