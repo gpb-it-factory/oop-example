@@ -3,16 +3,15 @@ import java.math.BigDecimal;
 // Liskov substitution Principle - принцип подстановки Барбары Лисков.
 // Должна быть возможность вместо базового (родительского) типа (класса) подставить любой его подтип (класс-наследник),
 // при этом работа программы не должна измениться.
-
 public void main() {
-    var salaryAccount = new SalaryAccount();
+    Account salaryAccount = new SalaryAccount();
     salaryAccount.withdraw("40702810200210000237", BigDecimal.valueOf(150));
 
-    var depositAccount = new DepositAccount();
+    Account depositAccount = new DepositAccount();
     try {
         depositAccount.withdraw("40702810200210000238", BigDecimal.valueOf(100));
     } catch (UnsupportedOperationException e) {
-        // ignored
+        System.out.println(e.getMessage());
     }
 
     var lspSalaryAccount = new LSPSalaryAccount();

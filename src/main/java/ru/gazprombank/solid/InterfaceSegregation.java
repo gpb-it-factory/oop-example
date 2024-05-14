@@ -1,7 +1,6 @@
 // Interface Segregation Principle - принцип разделения интерфейсов.
 // Данный принцип означает, что не нужно заставлять клиента (класс) реализовывать интерфейс,
 // который не имеет к нему отношения.
-
 public void main() {
     var internetPaymentService = new InternetPaymentService();
     internetPaymentService.payWebMoney();
