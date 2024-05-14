@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 // Модули верхнего уровня не должны зависеть от модулей нижнего уровня.
 // И те, и другие должны зависеть от абстракции.
 // Абстракции не должны зависеть от деталей. Детали должны зависеть от абстракций.
-
 public void main() {
     var shop = new Shop(new Cash());
     var order = new Order(BigDecimal.valueOf(300));
